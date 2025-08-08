@@ -1,0 +1,32 @@
++--------------------+                                +-------------------+
+|     Client         |                                |     Server        |
+|  (Browser/App)     |                                |   (Node.js API)   |
++--------------------+                                +-------------------+
+         |                                                      
+         | 1. Login Request: email + password                   
+         | -------------------------------------------------->  
+         |                                                   
+         | 2. Validate credentials                            
+         |    - Check user in DB                              
+         |    - Compare password                              
+         |                                                   
+         | 3. Generate JWT (signed with secret key)           
+         |    Payload: { userId, email, iat, exp }            
+         |                                                   
+         | 4. Send back JWT in response                       
+         | <-------------------------------------------------- 
+         |                                                   
+         | 5. Store JWT (localStorage / cookie)               
+         |                                                   
+         |                                                   
+         | 6. Send request to protected route with JWT        
+         |    Header: Authorization: Bearer <token>          
+         | --------------------------------------------------> 
+         |                                                   
+         | 7. Server verifies token with secret              
+         |    - If valid: grant access                       
+         |    - If invalid/expired: reject request           
+         |                                                   
+         | 8. Send protected resource                        
+         | <-------------------------------------------------- 
+         |                                                   
